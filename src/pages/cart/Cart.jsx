@@ -41,7 +41,9 @@ function Cart() {
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems])
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const [name, setName] = useState("")
   const [address, setAddress] = useState("");
