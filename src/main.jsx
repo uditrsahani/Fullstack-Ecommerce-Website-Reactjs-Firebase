@@ -12,3 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>,
 )
+
+// var cors = require('cors')
+// const app = require('express')
+// app.use(cors()) // Use this after the variable declaration

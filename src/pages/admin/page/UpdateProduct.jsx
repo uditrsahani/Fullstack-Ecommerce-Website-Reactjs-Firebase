@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
 import myContext from '../../../context/data/myContext';
 import { setDoc, doc } from 'firebase/firestore';
+import { useEffect } from 'react';
+
 function UpdateProduct() {
     const context = useContext(myContext);
     const { products, setProducts, updateProduct } = context;
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     return (
         <div>
             <div className=' flex justify-center items-center h-screen'>

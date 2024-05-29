@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Modal({ name, address, pincode, phoneNumber, setName, setAddress, setPincode, setPhoneNumber, buyNow }) {
     let [isOpen, setIsOpen] = useState(false)
@@ -12,18 +13,33 @@ export default function Modal({ name, address, pincode, phoneNumber, setName, se
         setIsOpen(true)
     }
 
+    const user = JSON.parse(localStorage.getItem('user'))
+
     // console.log(name,address,pincode,phoneNumber)
     return (
         <>
-            <div className="  text-center rounded-lg text-white font-bold">
+        {
+            user? <div className="  text-center rounded-lg text-white font-bold">
+            <button
+                type="button"
+                onClick={openModal}
+                className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold"
+            >
+                Buy Now
+            </button>
+        </div>: <Link to='/login'>
+        <div className="  text-center rounded-lg text-white font-bold">
                 <button
                     type="button"
-                    onClick={openModal}
+                    // onClick={openModal}
                     className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold"
                 >
-                    Buy Now
+                    Login to Buy
                 </button>
             </div>
+        </Link>
+        }
+            
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>

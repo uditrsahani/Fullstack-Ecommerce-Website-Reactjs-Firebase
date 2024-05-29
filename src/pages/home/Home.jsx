@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import myContext from "../../context/data/myContext";
 import Layout from "../../components/layout/Layout";
@@ -13,13 +13,13 @@ import Track from "../../components/track/Track";
 
 function Home() {
   const context = useContext(myContext);
-  console.log(context);
+
   const { color, state } = context;
 
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart);
 
-  console.log(cartItem);
+
 
   const addCart = () => {
     dispatch(addToCart("Shirt"));
@@ -28,6 +28,10 @@ function Home() {
   const deleteCart = () => {
     dispatch(deleteFromCart("shirt"));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <Layout>

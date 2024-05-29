@@ -13,6 +13,12 @@ import AddProduct from "./pages/admin/page/AddProduct";
 import UpdateProduct from "./pages/admin/page/UpdateProduct";
 import ProductCard from "./components/productCard/ProductCard";
 import Allproducts from "./pages/allproducts/AllProducts";
+import { ContactUs } from "./pages/contact/ContactUs";
+import About from "./pages/about/About";
+import ReturnPolicy from "./pages/returnpolicy/ReturnPolicy";
+import PrivacyPolicy from "./pages/privacypolicy/PrivacyPolicy";
+import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
+import UserProfile from "./components/test/Test";
 
 function App() {
   return (
@@ -31,6 +37,12 @@ function App() {
           <Route path="/updateproduct" element={<UpdateProduct/>} />
           <Route path="/products" element={<ProductCard/>}/>
           <Route path='/allproducts' element={<Allproducts/>}/>
+          <Route path='/contact' element={<ContactUs/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/return-policy' element={<ReturnPolicy/>}/>
+          <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
+          <Route path='/test' element={<UserProfile/>}/>
         </Routes>
       </Router>
     </MyState>

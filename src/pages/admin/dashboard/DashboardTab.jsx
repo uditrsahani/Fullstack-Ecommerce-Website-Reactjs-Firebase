@@ -23,7 +23,7 @@ function DashboardTab() {
     <div>
       <div className="container mx-auto">
         <div className="tab container mx-auto ">
-          <Tabs defaultIndex={0} className=" ">
+          <Tabs key={Math.random()} defaultIndex={0} className=" ">
             <TabList className="md:flex md:space-x-8 bg-  grid grid-cols-2 text-center gap-4   md:justify-center mb-10 ">
               <Tab>
                 <button
@@ -150,7 +150,7 @@ function DashboardTab() {
                               className="px-6 py-4 text-black "
                               style={{ color: mode === "dark" ? "white" : "" }}
                             >
-                              ₹{price}
+                              ฿{price}
                             </td>
                             <td
                               className="px-6 py-4 text-black "
@@ -283,7 +283,7 @@ function DashboardTab() {
                           imageUrl,
                           price,
                         } = item;
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <tbody>
                             <tr

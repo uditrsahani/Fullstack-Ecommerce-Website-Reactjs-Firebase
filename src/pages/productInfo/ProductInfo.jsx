@@ -9,6 +9,9 @@ import { addToCart } from '../../redux/cartSlice';
 import { fireDB } from '../../firebase/FirebaseConfig';
 
 function ProductInfo() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const context = useContext(myContext);
     const { loading, setLoading } = context;
 

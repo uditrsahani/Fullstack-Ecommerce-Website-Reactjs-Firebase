@@ -1,7 +1,11 @@
 import React, { useContext } from 'react'
 import myContext from '../../../context/data/myContext';
+import { useEffect } from 'react';
 
 function AddProduct() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const context = useContext(myContext);
     const { products, setProducts, addProduct } = context;
     return (

@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom'
 import myContext from '../../context/data/myContext';
 import { useContext, useState } from 'react';
-import { toast } from 'react-toastify';
+import toast, { Toaster } from 'react-hot-toast';
 // import { auth } from '../../firebase/firebaseConfig';
 import { auth } from '../../firebase/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 // import Loader from '../../components/loader/Loader';
 import Loader from '../../components/loader/Loader';
+import { useEffect } from 'react';
 
 function Login() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,35 +26,35 @@ function Login() {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password)
         localStorage.setItem('user',JSON.stringify(result));
-        toast.success('Signin Successfully', {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        console.log(result)
+        toast("Logged in successfully!", {
+            style: {
+              border: "2px solid #3d85c6",
+              padding: "16px",
+              color: "#ffffff",
+              fontWeight: "bold",
+              background: "#6aa84f",
+            },
+          });
         window.location.href='/'
         setLoading(false);
       } catch (error) {
-        toast.error('Sigin Failed', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast("Login Failed, try again!", {
+            style: {
+              border: "2px solid #3d85c6",
+              padding: "16px",
+              color: "#ffffff",
+              fontWeight: "bold",
+              background: "#cc0000",
+            },
+          });
         setLoading(false);
       }
     }
    
     return (
         <div className=' flex justify-center items-center h-screen'>
+               <Toaster/>
             {loading && <Loader/>}
             <div className=' bg-gray-800 px-10 py-10 rounded-xl '>
                 <div className="">
@@ -82,6 +87,9 @@ function Login() {
                 </div>
                 <div>
                     <h2 className='text-white'>Don't have an account <Link className=' text-yellow-500 font-bold' to={'/signup'}>Signup</Link></h2>
+                </div>
+                <div>
+                    <h2 className='text-white'>Forgot password? <Link className=' text-yellow-500 font-bold' to={'/forgot-password'}>Reset here</Link></h2>
                 </div>
             </div>
         </div>
