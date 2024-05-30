@@ -28,8 +28,9 @@ function Cart() {
     // console.log(temp)
   }, [cartItems])
 
-  const shipping = parseInt(100);
+  let shipping = parseInt(100);
   const grandTotal = shipping + totalAmount
+  let freeDelivery = 'Free Delivery'
 
   // add to cart
   const deleteCart = (item) => {
@@ -166,14 +167,15 @@ function Cart() {
               <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>฿{totalAmount}</p>
             </div>
             <div className="flex justify-between">
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shipping</p>
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>฿{shipping}</p>
+              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shipping </p>
+              
+              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>{totalAmount >= 500? freeDelivery: shipping}</p>
             </div>
             <hr className="my-4" />
             <div className="flex justify-between mb-3">
               <p className="text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>Total</p>
               <div className>
-                <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>฿{grandTotal}</p>
+                <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>{totalAmount >= 500? '฿'+(grandTotal-100): '฿'+grandTotal}</p>
               </div>
             </div>
             <Modal name={name} address={address} pincode={pincode} phoneNumber={phoneNumber} setName={setName} setAddress={setAddress} setPincode={setPincode} setPhoneNumber={setPhoneNumber} buyNow={buyNow} />

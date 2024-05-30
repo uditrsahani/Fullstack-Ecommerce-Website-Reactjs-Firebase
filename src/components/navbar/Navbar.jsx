@@ -160,7 +160,7 @@ var photoURL = foundObject.photoURL;
                     )}
                   </div>
 
-                  {admin?.user?.email === "uditrsahani@gmail.com" ? (
+                  {admin?.user?.email === "uditrsahani@gmail.com" || "testAdmin@gmail.com" ? (
                     <div className="flow-root">
                       <Link
                         to={"/dashboard"}
@@ -335,10 +335,11 @@ var photoURL = foundObject.photoURL;
                 <Link to={"/"} className="flex">
                   <div className="flex ">
                     <h1
-                      className=" text-2xl font-bold text-black  px-2 py-1 rounded"
+                      className="  text-lg italic font-bold text-[rgb(219,39,119)"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Urban-Bazaar
+                      <p className="text-sm italic font-normal text-[rgb(219,39,119)]">Gift Delivery in Thailand</p>
                     </h1>
                   </div>
                 </Link>
@@ -366,7 +367,7 @@ var photoURL = foundObject.photoURL;
                     ""
                   )}
 
-                  {admin?.user?.email == "uditrsahani@gmail.com" ? (
+                  {admin?.user?.email == "uditrsahani@gmail.com" || "testAdmin@gmail.com" ? (
                     <Link
                       to={"/dashboard"}
                       className="text-sm font-medium text-gray-700 "

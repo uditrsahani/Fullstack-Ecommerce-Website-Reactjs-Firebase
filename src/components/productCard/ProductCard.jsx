@@ -6,11 +6,10 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function ProductCard() {
   const context = useContext(myContext);
-  const { mode, product, searchkey, filterType, filterPrice } = context;
+  const { mode, product, searchkey, filterType, minPrice, maxPrice } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
-  // console.log(cartItems)
 
   // add to cart
   const addCart = (product) => {
@@ -22,20 +21,33 @@ function ProductCard() {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+
+
+  const filteredProducts = product.filter((product) => {
+    const price = parseFloat(product.price);
+    const min = parseFloat(minPrice) || 0;
+    const max = parseFloat(maxPrice) || Infinity;
+    const matchesKeyword = product.title.toLowerCase().includes(searchkey.toLowerCase());
+    const matchesCategory = filterType.toLowerCase() === 'product type' || product.category.toLowerCase() === filterType.toLowerCase();
+    const matchesPrice = price >= min && price <= max;
+
+    return matchesKeyword && matchesCategory && matchesPrice;
+  });
+
   return (
     <section className="text-gray-600 body-font">
-         <Toaster
-                          toastOptions={{
-                            className: "",
-                            style: {
-                              border: "2px solid #3d85c6",
-                              padding: "16px",
-                              color: "#ffffff",
-                              fontWeight: "bold",
-                              background: "#6aa84f",
-                            },
-                          }}
-                        />
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: "2px solid #3d85c6",
+            padding: "16px",
+            color: "#ffffff",
+            fontWeight: "bold",
+            background: "#6aa84f",
+          },
+        }}
+      />
       <div className="container px-5 py-8 md:py-16 mx-auto">
         <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
           <h1
@@ -48,16 +60,13 @@ function ProductCard() {
         </div>
 
         <div className="flex flex-wrap -m-4">
-          {product
-            .filter((obj) => obj.title.toLowerCase().includes(searchkey))
-            .filter((obj) => obj.category.toLowerCase().includes(filterType))
-            .filter((obj) => obj.price.includes(filterPrice))
-            .map((item, index) => {
-              const { title, price, description, imageUrl } = item;
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((item, index) => {
+              const { title, price, imageUrl } = item;
               return (
-                <div key={index+1} className="p-4 md:w-1/4  drop-shadow-lg ">
+                <div key={index} className="p-4 md:w-1/4 drop-shadow-lg">
                   <div
-                    className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
+                    className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
                     style={{
                       backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                       color: mode === "dark" ? "white" : "",
@@ -70,9 +79,9 @@ function ProductCard() {
                       className="flex justify-center cursor-pointer"
                     >
                       <img
-                        className=" rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
+                        className="rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110 duration-300 ease-in-out"
                         src={imageUrl}
-                        alt="blog"
+                        alt="product"
                       />
                     </div>
                     <div className="p-5 border-t-2">
@@ -88,33 +97,32 @@ function ProductCard() {
                       >
                         {title}
                       </h1>
-                      {/* <p className="leading-relaxed mb-3">{item.description.}</p> */}
                       <p
                         className="leading-relaxed mb-3"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         ฿ {price}
                       </p>
-                      <div className=" flex justify-center">
+                      <div className="flex justify-center">
                         <button
                           onClick={() => addCart(item)}
                           type="button"
-                          className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full  py-2"
+                          className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
                         >
                           Add To Cart
                         </button>
-                       
                       </div>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <p style={{ color: mode === "dark" ? "white" : "black" }}>
+              No products found
+            </p>
+          )}
         </div>
-        {/* <div className=" flex justify-center">
-                                        <button onClick={()=>addCart()} type="button" className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full  py-2">Add To Cart</button>
-
-                                    </div> */}
       </div>
     </section>
   );

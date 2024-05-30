@@ -33,7 +33,7 @@ function Dashboard() {
 
   return (
     <Layout>
-      {admin?.user?.email === "uditrsahani@gmail.com" ? (
+      {admin?.user?.email === "uditrsahani@gmail.com" || "testAdmin@gmail.com"? (
         <section className="text-gray-600 body-font mt-10 mb-10">
           <div className="container px-5 mx-auto mb-10">
             <div className="flex flex-wrap -m-4 text-center">

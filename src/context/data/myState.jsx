@@ -89,7 +89,7 @@ function MyState(props) {
       setLoading(false)
     }
   }
-
+ 
 
   const edithandle = (item) => {
     setProducts(item)
@@ -177,14 +177,16 @@ function MyState(props) {
 //filter useState
 const [searchkey, setSearchkey] = useState('')
 const [filterType, setFilterType] = useState('')
-const [filterPrice, setFilterPrice] = useState('')
+const [minPrice, setMinPrice] = useState('')
+const [maxPrice, setMaxPrice] = useState('')
+
 
   return (
     <MyContext.Provider value={{
       mode, toggleMode, loading, setLoading,
       products, setProducts, addProduct, product,
       updateProduct,edithandle,deleteProduct,order,user, searchkey, setSearchkey,filterType, setFilterType,
-      filterPrice, setFilterPrice
+      minPrice, setMinPrice, maxPrice, setMaxPrice,
     }}>
       {props.children}
     </MyContext.Provider>

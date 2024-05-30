@@ -175,12 +175,12 @@ function ProductInfo() {
                                 </span>
                             </div>
                             <p className="leading-relaxed border-b-2 mb-5 pb-5">
-                                {products.description}
+                            {products.description}
                             </p>
 
                             <div className="flex">
                                 <span className="title-font font-medium text-2xl text-gray-900">
-                                ₹{products.price}
+                                ฿{products.price}
                                 </span>
                                 <button  onClick={()=>addCart(products)} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                                     Add To Cart

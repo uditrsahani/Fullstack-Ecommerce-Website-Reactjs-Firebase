@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
+
+//Product card filter:
+//.filter((obj) => obj.price.includes(minPrice))
+
 function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
 
