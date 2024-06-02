@@ -10,8 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/cartSlice";
 import { Link } from "react-router-dom";
 import Track from "../../components/track/Track";
+import { showAlert } from "../../components/alert/Alert";
+import toast, {Toaster} from "react-hot-toast";
 
 function Home() {
+  // useEffect(() => {
+  //   showAlert();
+  // }, []);
   const context = useContext(myContext);
 
   const { color, state } = context;

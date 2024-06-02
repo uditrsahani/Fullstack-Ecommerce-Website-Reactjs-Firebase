@@ -14,14 +14,11 @@ export default function Navbar() {
   // const username = localStorage.getItem('user').user.username;
 
   const context = useContext(myContext);
-  const { toggleMode, mode, user} = context;
- 
- 
+  const { toggleMode, mode, user } = context;
 
   const user1 = JSON.parse(localStorage.getItem("user"));
-  const admin = JSON.parse(localStorage.getItem("user"));
- 
-  
+  const admin = user1?.user?.email;
+
   //user profile photo url
   // const targetEmail = user.email;
   // const filteredUsers = user1.filter(item => item.email === targetEmail);
@@ -37,29 +34,21 @@ export default function Navbar() {
   //     }
   //   }
   // })
-  if(user1){
+  if (user1) {
     const userid = JSON.parse(localStorage.getItem("user")).user.uid;
-      // 
-  // console.log(userid)
-  // console.log(user)
-  let foundObject = 'test';
-  let currentUser = user.filter((obj) => obj.uid == userid) 
-  for (let i = 0; i < user.length; i++) {
-    if (user[i].uid === userid) {
+    //
+    // console.log(userid)
+    // console.log(user)
+    let foundObject = "test";
+    let currentUser = user.filter((obj) => obj.uid == userid);
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].uid === userid) {
         foundObject = user[i];
         break; // Exit loop once the object is found
+      }
     }
-    
-}
-var photoURL = foundObject.photoURL;
-
+    var photoURL = foundObject.photoURL;
   }
-
-  
-
-  
-
-  
 
   //translate
   const [language, setLanguage] = useState("eng");
@@ -70,8 +59,6 @@ var photoURL = foundObject.photoURL;
     setLanguage(selectedLanguage);
     translatePageContent(selectedLanguage);
   };
-
-
 
   const logout = () => {
     localStorage.clear("user1");
@@ -144,10 +131,8 @@ var photoURL = foundObject.photoURL;
                     All Products
                   </Link>
 
-                  
                   <div className="flow-root">
                     {user1 ? (
-                     
                       <Link
                         to={"/order"}
                         style={{ color: mode === "dark" ? "white" : "" }}
@@ -160,7 +145,8 @@ var photoURL = foundObject.photoURL;
                     )}
                   </div>
 
-                  {admin?.user?.email === "uditrsahani@gmail.com" || "testAdmin@gmail.com" ? (
+                
+                  {admin == "uditrsahani@gmail.com" ? (
                     <div className="flow-root">
                       <Link
                         to={"/dashboard"}
@@ -193,36 +179,34 @@ var photoURL = foundObject.photoURL;
                       Signup/Login
                     </Link>
                   )}
-                  {user1?(
-                  <div className="flow-root">
-                    <Link
-                      to={"/"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                    > 
-                    {photoURL?
-                      <img
-                      className="inline-block w-10 h-10 rounded-full"
-                      src={photoURL}
-                      alt="Profile"
-                      width="50"
-                      height="50"
-                  
-                    />:
-                      <img
-                    src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
-                    alt="Profile"
-                    width="50"
-                    height="50"
-                  />}
-                     
-                    </Link>
-                  </div>
+                  {user1 ? (
+                    <div className="flow-root">
+                      <Link
+                        to={"/"}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                      >
+                        {photoURL ? (
+                          <img
+                            className="inline-block w-10 h-10 rounded-full"
+                            src={photoURL}
+                            alt="Profile"
+                            width="50"
+                            height="50"
+                          />
+                        ) : (
+                          <img
+                            src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
+                            alt="Profile"
+                            width="50"
+                            height="50"
+                          />
+                        )}
+                      </Link>
+                    </div>
                   ) : (
                     ""
                   )}
                 </div>
-
-              
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
@@ -339,7 +323,9 @@ var photoURL = foundObject.photoURL;
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Urban-Bazaar
-                      <p className="text-sm italic font-normal text-[rgb(219,39,119)]">Gift Delivery in Thailand</p>
+                      <p className="text-sm italic font-normal text-[rgb(219,39,119)]">
+                        Gift Delivery in Thailand
+                      </p>
                     </h1>
                   </div>
                 </Link>
@@ -355,7 +341,6 @@ var photoURL = foundObject.photoURL;
                     All Products
                   </Link>
                   {user1 ? (
-                    
                     <Link
                       to={"/order"}
                       className="text-sm font-medium text-gray-700 "
@@ -367,10 +352,10 @@ var photoURL = foundObject.photoURL;
                     ""
                   )}
 
-                  {admin?.user?.email == "uditrsahani@gmail.com" || "testAdmin@gmail.com" ? (
+                  {admin == "uditrsahani@gmail.com" ? (
                     <Link
                       to={"/dashboard"}
-                      className="text-sm font-medium text-gray-700 "
+                      className="ml-4 text-sm font-medium text-gray-700 hover:text-gray-800"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Admin
@@ -456,24 +441,23 @@ var photoURL = foundObject.photoURL;
                   </a>
                 </div>
                 {/* Laptop size image */}
-                
-             
-                
+
                 {user1 ? (
                   <div className="hidden lg:ml-8 lg:flex">
                     <a href="#" className="flex items-center text-gray-700 ">
-                    {photoURL?
-                     <img
-                     className="inline-block w-10 h-10 rounded-full"
-                     src={photoURL}
-                     alt={user1?.user?.email}
-                   />:
-                   <img
-                        className="inline-block w-10 h-10 rounded-full"
-                        src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
-                        alt={user1?.user?.email}
-                      />
-                    }
+                      {photoURL ? (
+                        <img
+                          className="inline-block w-10 h-10 rounded-full"
+                          src={photoURL}
+                          alt={user1?.user?.email}
+                        />
+                      ) : (
+                        <img
+                          className="inline-block w-10 h-10 rounded-full"
+                          src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
+                          alt={user1?.user?.email}
+                        />
+                      )}
                     </a>
                   </div>
                 ) : (
