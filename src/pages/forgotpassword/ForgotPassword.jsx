@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     setError("");
 
     const actionCodeSettings = {
-      url: "http://localhost:5173/login", // Specify your redirect URL here
+      url: "https://fullstack-e-commerce-website-reactjs-firebase.vercel.app/login", // Specify your redirect URL here
       handleCodeInApp: true,
     };
 
